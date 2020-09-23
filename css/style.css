@@ -1,0 +1,34 @@
+.board-container {
+    justify-content: center; 
+     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    background-color: white;
+}
+
+.cell {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    transition: .5s;
+    background-color: grey;
+    box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;
+    
+   
+}
+span{
+    visibility: hidden;
+}
+img{
+    height: 35px;
+    width: 35px;
+}
+
+.mark {
+    background-color: white;
+}
+td:hover {
+    outline: 2px solid black;
+}
+

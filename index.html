@@ -1,0 +1,31 @@
+<head>
+    <title>MineSweeper
+    </title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body onload="initGame()">
+    <div class="container" >
+    <div class="title">
+        <h1>MineSweeper</h1>
+    </div>
+
+        <button onclick="setDiffLvl(1)">Beginner</button>
+        <button onclick="setDiffLvl(2)">Medium</button>
+        <button onclick="setDiffLvl(3)">Extreme Lvl!</button>
+        <div class="timer">
+            <h4></h4>
+        </div>
+        <table border="1" cellpadding="10">
+            <tbody class="board-container">
+                
+            </tbody>
+        </table>
+        <button onclick="init()">Restart Game</button>
+    </div>
+    
+        <script src="js/util.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,3 +1,19 @@
+body {
+    background-image: url(https://i.giphy.com/media/3oKIPwoeGErMmaI43S/giphy.webp);
+    background-size: 100%;
+    color:black;
+    justify-content: center; 
+    display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center; 
+}
+  
+
+  
+.container span {
+    visibility: visible;
+}
 .board-container {
     justify-content: center; 
      display: flex;
@@ -18,8 +34,43 @@
    
 }
 span{
+    text-align: center;
     visibility: hidden;
+
+
 }
+
+.restart-container {
+    position: center;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    color:blue;
+}
+.victory-container {
+    position: center;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    color:blue;
+}
+.modal {
+    background-color: black;
+    display:block;
+    position: center;
+    margin :auto;
+    top:80px;
+    right: 120px;
+    padding: 40px;
+    width: 80px;
+    font-size: large;
+    font-weight: large;
+}
+
 img{
     height: 35px;
     width: 35px;
@@ -28,7 +79,34 @@ img{
 .mark {
     background-color: white;
 }
+
 td:hover {
     outline: 2px solid black;
 }
 
+.revealed {
+    background-color: #DDD;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+.exploade {
+    background-color:red;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.flags span{
+    color:black;
+    visibility:visible;
+}
+
+.timer span{
+    visibility:visible;
+    color: black;
+}
+.lives span{
+    visibility:visible;
+    color: black;
+}

@@ -4,17 +4,20 @@ var gGame = {
     mines: 2,
     isOn: true,
     secsPassed: 0,
-    lives: 3
+    lives: 3,
+    // hints: 3
 };
 var gMinesPos;
 var gGameInterval
 var gFlagsCount;
 var gBoard;
+var gHintInterval;
 var gIsFirstClick;
+// var gIsHint = false;
 const MINE = '<img src="img/mine.png">';
 const FLAG = '<img src="img/flag.png">';
-
 closeContextMenu();
+
 
 function initGame() {
     gMinesPos = [];
@@ -67,7 +70,6 @@ function buildBoard() {
             };
         }
     }
-    // console.log('board[1][1].isMine:', board[1][1].isMine)
     // console.table('board:', board)
     return board;
 }
@@ -105,20 +107,21 @@ function placesMines() {
     }
 }
 
-function restartGame(){
+function restartGame() {
     clearInterval(gGameInterval)
     closeModals();
     gMinesPos = [];
     gGame.isOn = true;
     gGame.secsPassed = 0;
-    gGame.lives =3;
+    gGame.lives = 3;
+    gGame.hints = 3;
     initGame();
 }
 
 //blocks clicking on marked cell ,blocks double click on same cell, starts timer on first click / updating the model + DOM 
 function cellClicked(i, j) {
-    if (gBoard[i][j].isMarked) return
-    if (gBoard[i][j].isShown) return
+    if (gBoard[i][j].isMarked || gBoard[i][j].isShown) return
+
     if (!gGame.isOn) return
     if (gIsFirstClick) {
         placesMines();
@@ -127,6 +130,7 @@ function cellClicked(i, j) {
         gGameInterval = setInterval(showTimer, 1000);
         gIsFirstClick = false;
     }
+   
     gBoard[i][j].isShown = true;
     var elSpan = document.querySelector(`.cell${i}-${j} span`)
     var elCell = document.querySelector(`.cell${i}-${j}`)
@@ -141,7 +145,6 @@ function cellClicked(i, j) {
         updateLives();
         if (!gGame.lives) gameOver();
     }
-    // expandShown(gBoard, i, j) //- tried the recursive answer
     checkVictory();
 }
 //marks the cell with flag , and removes it,blocks marking a shown cell / updating the model+dom
@@ -169,6 +172,7 @@ function cellMarked(event, i, j) {
     checkVictory();
 
 }
+
 
 
 function gameOver() {
@@ -203,7 +207,7 @@ function setDiffLvl(num) { //set game diffcult
     if (gGame.size === 12) gGame.mines = 30;
     // console.log('gGame.mines:', gGame.mines)
     // console.log('gGame.size:', gGame.size)
-    initGame();
+    restartGame();
 
 }
 
@@ -309,3 +313,47 @@ function countCorrectMarks(board) {
     // console.log('correctedMarks:', correctedMarks)
     return correctedMarks;
 }
+
+
+
+
+
+                            // tried hint//
+
+// if (gIsHint) {
+//     revealNegs(i,j);
+//     gIsHint = !gIsHint;
+// }
+// function hintClicked() {
+//     gIsHint = true;
+// }
+// function revealNegs(i, j) {
+//     for (var rowIdx = i - 1; rowIdx <= i + 1; rowIdx++) {
+//         if (rowIdx < 0 || rowIdx >= gBoard.length) continue;
+//         for (var colIdx = j - 1; colIdx <= j + 1; colIdx++) {
+//             if (colIdx < 0 || colIdx >= gBoard.length) continue;
+//             if (i === rowIdx && j === colIdx) continue;
+//             var elSpan = document.querySelector(`.cell${rowIdx}-${colIdx} span`)
+//             var elCell = document.querySelector(`.cell${rowIdx}-${colIdx}`)
+//             elCell.classList.add('revealed')
+//             elSpan.style.visibility = 'visible';
+//             gHintInterval = setTimeout(closesNegs(rowIdx, colIdx),1000)
+//         }
+//     }
+// }
+
+// function closesNegs(i, j) {
+//     for (var rowIdx = i - 1; rowIdx <= i + 1; rowIdx++) {
+//         if (rowIdx < 0 || rowIdx >= gBoard.length) continue;
+//         for (var colIdx = j - 1; colIdx <= j + 1; colIdx++) {
+//             if (colIdx < 0 || colIdx >= gBoard.length) continue;
+//             if (i === rowIdx && j === colIdx) continue;
+//             var currCell = gBoard[rowIdx][colIdx];
+//             var oldCell = (currCell.isMine) ? MINE : (currCell.minesAroundCount) ? currCell.minesAroundCount : '';
+//             var cellValue = `<span>${oldCell}</span>`
+//             currCell.classList.remove('revealed');
+//             currCell.classList.add('cell')
+//             renderCell(location, cellValue)
+//         }
+//     }
+// }
